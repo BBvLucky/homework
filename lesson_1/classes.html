@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ираклий К. ДЗ 1</title>
+</head>
+
+<body>
+    <script>
+        //создаём классы
+        class Human {
+            constructor(name, age, dateOfBirth) {
+                this.name = typeof (name) === 'string' ? name : 'invalid data'
+                this.age = typeof (age) === 'number' ? age : 'invalid data'
+                this.dateOfBirth = typeof (dateOfBirth) === 'string' || typeof (dateOfBirth) === 'object' ?
+                    dateOfBirth : 'invalid data'
+            }
+            displayInfo() {
+                console.log(`Имя: ${this.name} \nВозраст: ${this.age} \nДата рождения: ${this.dateOfBirth}`)
+            }
+        }
+
+        let humanito = new Human('Ираклий', '24', '14.02.1994')
+        humanito.displayInfo()
+
+        console.log('************')
+
+        class Employee extends Human {
+            constructor(name, age, dateOfBirth, salary, department) {
+                super(name, age, dateOfBirth)
+                this.salary = typeof (salary) === 'number' ? salary : 'invalid data'
+                this.department = typeof (department) === 'string' ? department : 'invalid data'
+            }
+            displayInfo() {
+                super.displayInfo()
+                console.log(`Зарплата: ${this.salary} руб.\nОтдел: ${this.department}`)
+            }
+        }
+
+        //тестим
+
+        let merch = new Employee('Вася', 25, '25.09.1998', 24000, 'merch')
+        merch.displayInfo()
+
+        console.log('************')
+
+        class Developer extends Employee {
+            constructor(name, age, dateOfBirth, salary, department) {
+                super(name, age, dateOfBirth, salary, department)
+                this.manager = ''
+            }
+
+            changeBoss(manager) {
+                this.manager = manager.name
+            }
+
+            displayInfo() {
+                super.displayInfo()
+                console.log(`Начальник: ${this.manager}`)
+            }
+        }
+
+        //завершаем создание дочерних классов
+
+        class Manager extends Employee {
+            constructor(name, age, dateOfBirth, salary, department) {
+                super(name, age, dateOfBirth, salary, department)
+                this.employeeList = []
+            }
+
+            addDeveloper(developer) {
+                this.employeeList.push(developer.name)
+            }
+
+            removeDeveloper(developer) {
+                this.employeeList.splice(this.employeeList.indexOf(developer)-1, 1)
+            }
+
+            displayInfo() {
+                super.displayInfo()
+                console.log(`Штат: ${this.employeeList}`)
+            }
+        }
+
+        //создам разработчиков и менеджеров
+
+        let developer = new Developer('Игорь', 75, '29.02.1875', 9, 'Development')
+        let developerTwo = new Developer('Яна', 20, '29.02.1998', 90, 'Development')
+        let developerThree = new Developer('Слава', 57, '29.02.1775', 997, 'Development')
+        let manager = new Manager('Борис', 18, '1.1.2000', 9999, 'Managment')
+        let managerTwo = new Manager('Лена', 25, '19.5.1994', 90999, 'Managment')
+
+        //тестим
+
+        manager.addDeveloper(developer)
+        manager.addDeveloper(developerTwo)
+        manager.addDeveloper(developerThree)
+        manager.displayInfo()
+        console.log('************')
+
+        manager.removeDeveloper(developerTwo)
+        manager.displayInfo()
+        console.log('************')
+
+        developer.changeBoss(manager)
+        developer.displayInfo()
+        developerTwo.displayInfo()
+        console.log('************')
+
+        developer.changeBoss(managerTwo)
+        developer.displayInfo()
+
+        // developer.changeBoss(manager)
+        // developer.displayInfo()
+    </script>
+</body>
+
+</html>
