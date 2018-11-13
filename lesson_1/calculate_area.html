@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ираклий К. ДЗ 1</title>
+</head>
+
+<body>
+    <script>
+        let result
+        let calculateArea = (figure, width, height) => {
+            let area
+            let input = {width: width, height: height}
+            //прямоугольные фигуры
+            if (figure == 'rectangle') {
+                area = width * height
+                //треугольные фигуры
+            } else if (figure == 'triangle') {
+                area = (width * height) / 2
+                //окружности
+            } else if (figure == 'circle') {
+                area = (width / 2) * (height / 2) * Math.PI
+            }
+            result = {area, figure, input}
+            return result
+        }
+
+        calculateArea('circle', 40, 89)
+        console.log(result)
+        calculateArea('triangle', 50, 90)
+        console.log(result)
+        calculateArea('rectangle', 50, 50)
+        console.log(result)
+    </script>
+</body>
+
+</html>
