@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     devServer: {
@@ -12,7 +13,8 @@ module.exports = {
         filename: 'ready.js',
         path: path.resolve(__dirname, "dist")
     },
-    mode: 'development',
+    mode: "development",
+    devtool: "cheap-module-eval-source-map",
     module: {
         rules: [{
                 test: /\.scss$/,
@@ -32,7 +34,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.jsx?s/,
+                test: /\.jsx?$/,
                 use: {
                     loader: "babel-loader",
                     options: {
@@ -85,6 +87,10 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin({
             filename: "style.css"
+        }),
+        new HtmlWebpackPlugin({
+            template: "./app/src/index.html",
+            filename: "index.html"
         })
     ]
 }

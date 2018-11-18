@@ -1,14 +1,8 @@
-import './style.scss'
-import '../../dist/index.html'
-import { showName } from './show_devs_name.js'
-import { displayDate as dispDate } from './disp_component'
+import React from "react";
+import ReactDOM from "react-dom";
 
-showName()
+import './style.scss';
 
-const showDate = new dispDate
-showDate.createElem()
-const button = document.querySelector('button')
+import App from './react/App.jsx';
 
-button.onclick = function () {
-    showDate.showDate()
-}
+ReactDOM.render(<App/>, document.querySelector('#app'));
