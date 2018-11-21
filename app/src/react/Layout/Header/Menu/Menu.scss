@@ -1,0 +1,19 @@
+.header-nav {
+    display: flex;
+    align-items: center;
+    
+    &-link {
+        margin: 0 10px 0 0;
+        text-decoration: none;
+        color: $color-white;
+        text-transform: uppercase;
+
+        &:hover {
+            color: darken($color-white, 10%);
+            text-shadow: 1px 3px 10px black;
+        }
+        &:active {
+            color: darken($color-white, 40%);
+        }
+    }
+}
