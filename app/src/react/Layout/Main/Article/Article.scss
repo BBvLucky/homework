@@ -4,11 +4,31 @@
     margin-bottom: 40px;
     box-shadow: 5px 4px 24px -3px fade-out($color-black, 0.5);
     padding-top: 10px;
-
+    
     &-caption {
-        margin: 0 0 20px 10px;
+        margin: 0 0 10px 10px;
+        text-transform: capitalize;
     }
-
+    
+    &-info {
+        background-color: fade-out($color-black, 0.95);
+        box-sizing: border-box;
+        padding: 5px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+    
+        &-author {
+            margin: 0;
+            font-weight: 400;
+            font-size: 17px;
+        }
+    
+        &-date {
+            font-weight: 300;
+            font-size: 14px;
+        }
+    }
     &-img {
         margin-bottom: 10px;
     }
@@ -21,20 +41,8 @@
         margin: 0 0 20px 10px !important;
     }
 
-    &-info {
-        background-color: fade-out($color-black, 0.85);
-        box-sizing: border-box;
-        padding: 5px;
-
-        &-author {
-            margin: 0;
-            font-weight: 400;
-            font-size: 17px;
-        }
-
-        &-date {
-            font-weight: 300;
-            font-size: 14px;
-        }
+    &-comments {
+        margin-left: 10px;
     }
+
 }

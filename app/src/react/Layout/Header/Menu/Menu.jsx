@@ -4,7 +4,7 @@ import "../../../../style.scss";
 class Menu extends Component {
     constructor(props) {
         super(props);
-        this.menu = [{title: 'Home', link: '#page'}, {title: 'Articles', link: '#articles'}, {title: 'About', link: '#'}, {title: 'Authors', link: '#'}];
+        this.menu = [{title: 'Home', link: '#'}, {title: 'Articles', link: '#articles'}, {title: 'About', link: '#'}, {title: 'Authors', link: '#'}];
         this.login = <a href="#">Login</a>;
     }
     render() {
