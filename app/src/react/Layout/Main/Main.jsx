@@ -1,17 +1,16 @@
 import React, { Component } from "react";
-import Content from "./Content/Content.jsx";
 import Aside from "./Aside/Aside.jsx";
-import NavTest from "./NavTest/NavTest.jsx";
+import Content from "./Content/Content.jsx";
 
 import "../../../style.scss";
-import ArticleBody from "./Article/ArticleBody.jsx";
 
 
 class Main extends Component {
     render() {
+        const { children } = this.props;
         return (
             <main className="main">
-                <NavTest />
+                <Content>{ children }</Content>
                 <Aside />
             </main>
         )

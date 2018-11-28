@@ -4,6 +4,27 @@ body {
   background-color: #f8f8f8;
   font-family: 'Roboto'; }
 
+div,
+li,
+ul,
+form,
+a,
+input,
+img,
+textarea,
+header,
+footer {
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none; }
+
+a:focus {
+  outline: none; }
+
+button:focus {
+  outline: none; }
+
 #page {
   width: 100%;
   margin: 0 auto;
@@ -25,15 +46,19 @@ body {
   display: flex;
   align-items: center; }
   .header-nav-link {
-    margin: 0 10px 0 0;
+    padding: 0 10px 2px 10px;
     text-decoration: none;
     color: #fff;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    border-bottom: 2px solid transparent; }
     .header-nav-link:hover {
-      color: #e6e6e6;
-      text-shadow: 1px 3px 10px black; }
+      border-bottom: 2px solid #3f51b5; }
     .header-nav-link:active {
-      color: #999999; }
+      color: #999999;
+      border-bottom: 2px solid #fff; }
+
+.active {
+  border-bottom: 2px solid #fff; }
 
 .login {
   display: flex;
@@ -71,68 +96,8 @@ body {
   position: relative;
   background-color: #fff; }
 
-.main-content-wrapper {
-  padding: 30px 0 0 30px; }
-
-.main-content-wrapper {
-  padding: 30px 0 0 30px; }
-  .main-content-wrapper .navigation {
-    display: flex;
-    width: 300px;
-    justify-content: space-around; }
-    .main-content-wrapper .navigation .link {
-      text-decoration: none;
-      color: #111;
-      border-bottom: 2px solid transparent; }
-      .main-content-wrapper .navigation .link:hover {
-        border-bottom: 2px solid #40e0d0; }
-      .main-content-wrapper .navigation .link:active {
-        border-bottom: 2px solid #3f51b5; }
-    .main-content-wrapper .navigation .active {
-      border-bottom: 2px solid #3f51b5; }
-
-.main-article {
-  background-color: #fff;
-  width: 700px;
-  margin-bottom: 40px;
-  box-shadow: 5px 4px 24px -3px rgba(17, 17, 17, 0.5);
-  padding-top: 10px; }
-  .main-article-caption {
-    margin: 0 0 10px 10px;
-    text-transform: capitalize; }
-  .main-article-info {
-    background-color: rgba(17, 17, 17, 0.05);
-    box-sizing: border-box;
-    padding: 5px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between; }
-    .main-article-info-author {
-      margin: 0;
-      font-weight: 400;
-      font-size: 17px; }
-    .main-article-info-date {
-      font-weight: 300;
-      font-size: 14px; }
-  .main-article-img {
-    margin-bottom: 10px; }
-  .main-article-text {
-    margin: 0 10px 15px 10px; }
-  .main-article-button {
-    margin: 0 0 20px 10px !important; }
-  .main-article-comments {
-    margin-left: 10px; }
-
-.main-articles-submit {
-  display: flex;
-  flex-wrap: wrap;
-  width: 700px;
-  margin-bottom: 30px; }
-  .main-articles-submit-caption {
-    width: 100%;
-    margin-left: 10px; }
-  .main-articles-submit-input {
-    width: 80%; }
+#content {
+  padding: 8.7px 0 10px 10px; }
 
 .comments {
   padding-bottom: 20px; }
@@ -255,6 +220,62 @@ body {
       background-color: rgba(63, 81, 181, 0.3); }
     .main-aside-themes-list-item-link:active {
       background-color: rgba(63, 81, 181, 0.7); }
+
+.main-home {
+  background-color: #fff;
+  box-shadow: 5px 4px 24px -3px rgba(17, 17, 17, 0.5);
+  padding: 15px;
+  width: 800px;
+  margin: 0 auto; }
+  .main-home-caption {
+    margin: 0 0 10px 0;
+    text-transform: capitalize;
+    text-align: center; }
+  .main-home-text {
+    margin: 0 10px 15px 10px; }
+
+.main-article {
+  background-color: #fff;
+  width: 700px;
+  margin-bottom: 40px;
+  box-shadow: 5px 4px 24px -3px rgba(17, 17, 17, 0.5);
+  padding-top: 10px; }
+  .main-article-caption {
+    margin: 0 0 10px 10px;
+    text-transform: capitalize; }
+  .main-article-info {
+    background-color: rgba(17, 17, 17, 0.05);
+    box-sizing: border-box;
+    padding: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between; }
+    .main-article-info-author {
+      margin: 0;
+      font-weight: 400;
+      font-size: 17px; }
+    .main-article-info-date {
+      font-weight: 300;
+      font-size: 14px; }
+  .main-article-img {
+    margin-bottom: 10px; }
+  .main-article-text {
+    margin: 0 10px 15px 10px; }
+  .main-article-button {
+    margin: 0 0 20px 10px !important; }
+  .main-article-comments {
+    margin-left: 10px; }
+
+.main-articles-submit {
+  display: flex;
+  flex-wrap: wrap;
+  width: 700px;
+  margin-bottom: 30px; }
+  .main-articles-submit-caption {
+    width: 100%;
+    margin-left: 10px; }
+  .main-articles-submit-input {
+    width: 80%; }
 
 .footer {
   box-sizing: border-box;

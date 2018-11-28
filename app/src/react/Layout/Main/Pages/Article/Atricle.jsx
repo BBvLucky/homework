@@ -1,0 +1,24 @@
+import React, { PureComponent } from "react";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+
+import "../../../../../style.scss";
+
+const Article = props => (
+    <article className="main-article" id={props.id}>
+        <h3 className="main-article-caption">{props.caption}</h3>
+        <div className="main-article-info">
+            <span className="main-article-info-author">{props.author}</span>
+            <span className="main-article-info-date">{props.date}</span>
+        </div>
+        <img src={props.src} alt={props.alt} className="main-article-img" />
+        <p className="main-article-text">{props.text}</p>
+        <Link
+            to={`/articles/${props.id}`}
+        >
+        <Button variant="contained" color="primary" className="main-article-button">Read &amp; Comment</Button>
+        </Link>
+    </article>
+);
+
+export default Article;

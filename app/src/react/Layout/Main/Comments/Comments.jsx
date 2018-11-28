@@ -12,12 +12,9 @@ class Comments extends PureComponent {
   state = {
     inputValue: "",
     time: moment(),
-    comments: [
-      {key: "q23",
-      href: "sadwd",
-      person: "Thomas",
-      text: "adwawd"}
-    ]
+    comments: sessionStorage.getItem("user-comments")
+    ? JSON.parse(sessionStorage.getItem("user-comments"))
+    : []
   };
 
   updateInputValue = event => {
@@ -53,6 +50,7 @@ class Comments extends PureComponent {
       inputValue: "",
       comments: newCommentsArray
     });
+    sessionStorage.setItem("user-comments", JSON.stringify(newCommentsArray));
   };
 
   onEnter = event => {

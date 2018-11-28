@@ -6,7 +6,8 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         port: 9000,
-        index: "index.html"
+        index: "index.html",
+        historyApiFallback: true
     },
     entry: "./app/src/main.js",
     output: {
