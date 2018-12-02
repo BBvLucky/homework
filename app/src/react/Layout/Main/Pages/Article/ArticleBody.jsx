@@ -1,10 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Chance from "chance";
 import Button from "@material-ui/core/Button";
 import Article from "./Atricle.jsx";
 import moment from "moment";
 import articleImg from "../../../../../assets/img.jpg";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import {
+    getArticlesList,
+    getArticlesLoading,
+    fetchArticles,
+    addArticle
+} from "../../../../../redux/modules/articles.js";
 
 import "../../../../../style.scss";
 
@@ -13,9 +20,11 @@ const chanceGenerator = new Chance();
 class ArticleBody extends Component {
     state = {
         time: moment(),
-        inputValue: "",
-        articles: sessionStorage.getItem("users-articles") ? JSON.parse(sessionStorage.getItem("users-articles"))
-           : []
+        inputValue: ""
+    };
+
+    componentDidMount() {
+        this.props.fetchArticles()
     };
 
     updateInputValue = event => {
@@ -30,7 +39,7 @@ class ArticleBody extends Component {
     };
 
     submitArticle = () => {
-        const { inputValue, articles } = this.state;
+        const { inputValue } = this.state;
 
         if (inputValue.length === 0) {
             return;
@@ -45,14 +54,11 @@ class ArticleBody extends Component {
             caption: "Random caption"
         };
 
-        const newArticlesArray = articles.slice();
-        newArticlesArray.unshift(articleData);
-
-        this.setState({
-            inputValue: "",
-            articles: newArticlesArray
+        this.props.addArticle(articleData).then(() => {
+            this.setState({
+                inputValue: ""
+            });
         });
-        sessionStorage.setItem("users-articles", JSON.stringify(newArticlesArray))
     };
 
     onEnter = event => {
@@ -62,12 +68,15 @@ class ArticleBody extends Component {
     };
 
     render() {
-        const { time, articles, inputValue } = this.state;
+        const { time, inputValue } = this.state;
+        const { articles, loading } = this.props;
         return (
             <section className="main-articles-wrapper">
                 <div className="main-articles-submit">
                     <h3 className="main-articles-submit-caption">Add an article</h3>
-                    <input className="main-articles-submit-input"
+                    <input
+                        disabled={loading}
+                        className="main-articles-submit-input"
                         value={inputValue}
                         onChange={this.updateInputValue}
                         onKeyPress={this.onEnter}
@@ -96,4 +105,19 @@ class ArticleBody extends Component {
     }
 }
 
-export default ArticleBody;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        articles: getArticlesList(state),
+        loading: getArticlesLoading(state)
+    };
+};
+
+const mapDispatchToProps = {
+    fetchArticles,
+    addArticle
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ArticleBody);
