@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
 import Chance from "chance";
-import moment from "moment";
+// import moment from "moment";
 import Button from "@material-ui/core/Button";
 import Comment from "./Comment.jsx";
 import {
@@ -18,8 +18,7 @@ const chanceGenerator = new Chance();
 
 class Comments extends PureComponent {
   state = {
-    inputValue: "",
-    time: moment()
+    inputValue: ""
   };
 
   componentDidMount() {
@@ -38,7 +37,7 @@ class Comments extends PureComponent {
   };
 
   submitComment = () => {
-    const { inputValue } = this.state;
+    const { inputValue, comments } = this.state;
 
     if (inputValue.length === 0) {
       return;
@@ -65,8 +64,13 @@ class Comments extends PureComponent {
     }
   };
 
+  // commentInfo(id, event) {
+  //   alert(id);
+  // }
+
+
   render() {
-    const { inputValue, time } = this.state;
+    const { inputValue } = this.state;
     const { comments, loading } = this.props;
     return (
       <div className="comments">
@@ -86,10 +90,9 @@ class Comments extends PureComponent {
             ? comments.map(comment => (
               <Comment
                 key={comment.id}
-                href={this.props.id}
-                person={comment.person}
-                text={comment.text}
-                date={time.format("DD.MM HH:mm")}
+                comment={comment}
+                // commentInfoFunction={this.commentInfo.bind(this, comment.id)}
+                // date={time.format("DD.MM HH:mm")}
               />
             ))
             : "There are no comments yet. Be first!"}

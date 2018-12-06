@@ -45,7 +45,6 @@ const reducer = (state = initState, action = {}) => {
                 list: (() => {
                     const newList = state.list.slice();
                     newList.unshift(action.payload);
-                    sessionStorage.setItem("user-comments", JSON.stringify(newList));
                     return newList;
                 })()
             };

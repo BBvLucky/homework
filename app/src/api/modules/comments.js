@@ -1,12 +1,20 @@
-import { fakeRequest } from "../fakeRequest.js";
+import { request } from "../request.js";
+import moment from "moment";
 
 export const fetchComments = () => {
-  const mockCommentsData = sessionStorage.getItem("user-comments")
-    ? JSON.parse(sessionStorage.getItem("user-comments"))
-    : [];
-  return fakeRequest(mockCommentsData, 1000).then(response => response);
+  return request({
+    url: "comments"
+  }).then(response => {
+    return response.data.sort((comment1, comment2) => {
+      return moment.utc(comment1.addedDate).isAfter(moment.utc(comment2.addedDate)) ? -1 : 1;
+    });
+  });
 };
 
 export const addComment = commentData => {
-  return fakeRequest(commentData, 1000).then(response => response);
+  return request({
+    method: "post",
+    url: "add_comment",
+    data: commentData
+  }).then(response => response.data)
 };

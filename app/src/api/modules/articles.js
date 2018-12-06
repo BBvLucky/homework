@@ -1,11 +1,20 @@
-import { fakeRequest } from "../fakeRequest.js";
+import { request } from "../request.js";
+import moment from "moment";
 
 export const fetchArticles = () => {
-    const mockArticleData = sessionStorage.getItem("users-articles") ? JSON.parse(sessionStorage.getItem("users-articles"))
-    : [];
-    return fakeRequest(mockArticleData, 1000).then(response => response);
+    return request({
+        url: "articles"
+    }).then(response => {
+        return response.data.sort((article1, article2) => {
+            return moment.utc(article1.addedDate).isAfter(moment.utc(article2.addedDate)) ? -1 : 1;
+        })
+    })
 };
 
 export const addArticle = articleData => {
-    return fakeRequest(articleData, 1000).then(response => response);
+    return request({
+        method: "post",
+        url: "add_article",
+        data: articleData
+    }).then(response => response.data)
 };

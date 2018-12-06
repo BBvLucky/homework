@@ -45,7 +45,6 @@ const reducer = (state = initState, action = {}) => {
                 list: (() => {
                     const newList = state.list.slice();
                     newList.unshift(action.payload);
-                    sessionStorage.setItem("users-articles", JSON.stringify(newList));
                     return newList;
                 })()
             };
@@ -67,6 +66,10 @@ export const getArticlesList = state => {
 export const getArticlesLoading = state => {
     return getLocalState(state).loading;
 }
+
+export const getArticleById = (state, id) => {
+    return getLocalState(state).list.find(article => article.id === id);
+  };
 
 //ACTION CREATORS
 

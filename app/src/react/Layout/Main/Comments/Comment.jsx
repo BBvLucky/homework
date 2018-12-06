@@ -1,12 +1,24 @@
-import React, { PureComponent } from "react";
+import React from "react";
+import { withRouter } from "react-router-dom";
 import "../../../../style.scss";
+import moment from "moment";
 
-const Comment = props => (
-  <a href={`#${props.href}`} className="comment">
-    <span className="comment-person">{`${props.person}:`}</span>
-    <span className="comment-text">{props.text}</span>
-    <span className="comment-date">{props.date}</span>
-  </a>
-);
+const Comment = props => {
+  const { comment } = props;
+  return (
+    <div className="comment">
+      <span className="comment-person">{`${comment.person}:`}</span>
+      <span className="comment-text">{comment.text}</span>
+      <span className="comment-date">
+        {
+          moment
+          .utc(comment.addedDate)
+          .local()
+          .format("DD.MM.YYYY HH:mm:ss")
+        }
+      </span>
+    </div>
+  )
+}
 
 export default Comment;

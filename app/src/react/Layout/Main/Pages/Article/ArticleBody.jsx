@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import Chance from "chance";
 import Button from "@material-ui/core/Button";
 import Article from "./Atricle.jsx";
-import moment from "moment";
+
 import articleImg from "../../../../../assets/img.jpg";
 // import { Link } from "react-router-dom";
 import {
@@ -17,31 +17,41 @@ import "../../../../../style.scss";
 
 const chanceGenerator = new Chance();
 
-class ArticleBody extends Component {
+class ArticleBody extends PureComponent {
     state = {
-        time: moment(),
-        inputValue: ""
+        inputCaptionValue: "",
+        inputTextValue: ""
     };
 
     componentDidMount() {
         this.props.fetchArticles()
     };
 
-    updateInputValue = event => {
-        let updatedInput = "";
+    updateInputTextValue = event => {
+        let updatedTextInput = "";
         if (event) {
-            updatedInput = event.target.value;
+            updatedTextInput = event.target.value;
         }
 
         this.setState({
-            inputValue: updatedInput
+            inputTextValue: updatedTextInput,
+        });
+    };
+    updateInputCaptionValue = event => {
+        let updatedCaptionInput = "";
+        if (event) {
+            updatedCaptionInput = event.target.value;
+        }
+
+        this.setState({
+            inputCaptionValue: updatedCaptionInput,
         });
     };
 
     submitArticle = () => {
-        const { inputValue } = this.state;
+        const { inputTextValue, inputCaptionValue } = this.state;
 
-        if (inputValue.length === 0) {
+        if (inputTextValue.length === 0 && inputCaptionValue === 0) {
             return;
         }
 
@@ -50,13 +60,14 @@ class ArticleBody extends Component {
                 pool: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
             }),
             author: chanceGenerator.name({ nationality: "en" }),
-            text: inputValue,
-            caption: "Random caption"
+            text: inputTextValue,
+            caption: inputCaptionValue
         };
 
         this.props.addArticle(articleData).then(() => {
             this.setState({
-                inputValue: ""
+                inputCaptionValue: "",
+                inputTextValue: ""
             });
         });
     };
@@ -68,7 +79,7 @@ class ArticleBody extends Component {
     };
 
     render() {
-        const { time, inputValue } = this.state;
+        const { inputTextValue, inputCaptionValue } = this.state;
         const { articles, loading } = this.props;
         return (
             <section className="main-articles-wrapper">
@@ -77,24 +88,29 @@ class ArticleBody extends Component {
                     <input
                         disabled={loading}
                         className="main-articles-submit-input"
-                        value={inputValue}
-                        onChange={this.updateInputValue}
+                        placeholder="Enter your caption"
+                        value={inputCaptionValue}
+                        onChange={this.updateInputCaptionValue}
+                        onKeyPress={this.onEnter}
+                    />
+                    <input
+                        disabled={loading}
+                        className="main-articles-submit-input"
+                        placeholder="Enter your text"
+                        value={inputTextValue}
+                        onChange={this.updateInputTextValue}
                         onKeyPress={this.onEnter}
                     />
                     <Button onClick={this.submitArticle}>Submit</Button>
                 </div>
                 <div className="main-articles-container">
                     {articles.length > 0
-                        ? articles.map(articles => (
+                        ? articles.map(article => (
                             <Article
-                                key={articles.id}
-                                id={articles.id}
-                                caption={articles.caption}
-                                src={articleImg}
+                                key={article.id}
                                 alt={"article-img"}
-                                text={articles.text}
-                                author={articles.author}
-                                date={time.format("DD.MM HH:mm")}
+                                article={article}
+                                src={articleImg}
                             >
                             </Article>
                         ))
