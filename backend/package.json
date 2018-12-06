@@ -1,0 +1,20 @@
+{
+  "name": "my_firtst_server",
+  "version": "1.0.0",
+  "description": "node js",
+  "main": "index.js",
+  "author": "iKoch",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "moment": "^2.22.2",
+    "mongodb": "^3.1.10"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  }
+}
